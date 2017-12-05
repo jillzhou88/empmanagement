@@ -1,0 +1,128 @@
+<div class="container detail">
+	<div class="row">          
+          <div class="box box-info">
+        
+            <div class="box-body">
+                <div class="col-sm-6">
+                    <div align="center">
+                        <img alt="User Pic" ngf-src="photo" id="profile-image1" class="img-circle img-responsive">
+                    </div>              
+                </div>
+
+                <div class="col-sm-6 title">
+                    <h2 style="color:#00b1b1;">{{fName + '&nbsp;' + lName}}</h2>
+                    <h4>{{title}}</h4>                    
+                </div>
+                <div class="clearfix"></div>
+                
+                
+                <div class="des">
+                    <form class="form-horizontal" name="empForm">
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Photo </label>
+                        <div class="col-sm-10">
+                          <input type="file" ngf-select ng-model="photo" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+                          <i ng-show="empForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                        </div>
+                      </div>
+                    <!-- First Name -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">First Name </label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" ng-model="fName" name="fName" required>
+                          <i ng-show="empForm.fName.$error.required">*required</i>
+                        </div>
+                      </div>
+                    <!-- Last Name -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Last Name </label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" ng-model="lName" name="lName" required>
+                          <i ng-show="empForm.lName.$error.required">*required</i>
+                        </div>
+                      </div>
+                    <!-- Title -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Title </label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" ng-model="title" name="title" required>
+                          <i ng-show="empForm.title.$error.required">*required</i>
+                        </div>
+                      </div>
+                    <!-- Gender -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Gender </label>
+                        <div class="col-sm-10">
+                          <div class="radio">
+                            <label>
+                              <input type="radio" ng-model="gender" value="male" name="gender" required>
+                              Male
+                            </label>
+                            <label>
+                              <input type="radio" ng-model="gender" value="female" name="gender" required>
+                              Female
+                            </label>
+                          <i ng-show="empForm.gender.$error.required">*required</i>
+                          </div>
+                        </div>
+                      </div>
+                    <!-- Start Date -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Start Date </label>
+                        <div class="col-sm-10">
+                            <label><select class="form-control" name="month" data-ng-model="startmonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()" required></select></label>
+                            <label><select class="form-control" name="day" data-ng-model="startday" ng-options="label for label in Days | limitTo:NumberOfDays" required></select></label>
+                            <label><select class="form-control" name="year" data-ng-model="startyear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()" required></select></label>
+                            <i ng-show="empForm.month.$error.required || empForm.day.$error.required || empForm.year.$error.required">*required</i>
+                        </div>
+                      </div>
+                    <!-- Office Phone -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Office Phone </label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text" ng-model="officephone" ui-mask="(999) 999-9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="_"/ name="officephone" required>
+                          <i ng-show="empForm.officephone.$error.required">*required</i>
+                        </div>
+                      </div>
+                    <!-- Cell Phone -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Cell Phone </label>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text" ng-model="cellphone" ui-mask="(999) 999-9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="_"/>
+                        </div>
+                      </div>
+                    <!-- Email Address -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Email </label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" ng-model="email" name="email" required>
+                          <i ng-show="empForm.email.$error.required">*required</i>
+                        </div>
+                      </div>
+                    <!-- Superior -->
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Superior </label>
+                        <div class="col-sm-10">
+                          <select name="superiors" class="form-control" ng-model="superiorId" ng-options="sup._id as sup.fName + ' ' + sup.lName for sup in superiors"></select>
+                        </div>
+                      </div>
+                    <!-- Button -->
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <a class="btn btn-default" href="#/">Cancel</a>
+                          <button type="submit" class="btn btn-primary" ng-disabled="!empForm.$valid" ng-click="saveEmp()">Create</button>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+            
+            </div><!-- /.box-body -->
+            
+        </div><!-- /.box -->   
+   </div>
+</div>
+
+
+
+
+         

@@ -1,0 +1,60 @@
+<div class="w3-container">
+
+    <h3>Employees Management System</h3>
+    <a class="w3-btn w3-green w3-ripple" href="#/new">&#9998; Create New Employee</a>
+    <br><br>
+    <input class="w3-input w3-border" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+
+    <div class="w3-responsive">
+        <table class="w3-table w3-bordered w3-striped w3-hoverable" infinite-scroll="increaseEmp()">
+      <tr> 
+        <th>Photo</th>
+        <th><a ng-click="sortBy('fName', true)">First Name</a><span class="sortorder" ng-show="propertyName === 'fName'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('lName', true)">Last Name</a><span class="sortorder" ng-show="propertyName === 'lName'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('title', true)">Title</a><span class="sortorder" ng-show="propertyName === 'title'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('gender', true)">Gender</a><span class="sortorder" ng-show="propertyName === 'gender'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('email', true)">Email</a><span class="sortorder" ng-show="propertyName === 'email'" ng-class="{reverse: reverse}"></span></th>  
+        <th><a ng-click="sortBy('cellphone', true)">Cell Phone</a><span class="sortorder" ng-show="propertyName === 'cellphone'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('officephone', true)">Office Phone</a><span class="sortorder" ng-show="propertyName === 'officephone'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('startdate', true)">Start Date</a><span class="sortorder" ng-show="propertyName === 'startdate'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('superior.fName', true)">Superior</a><span class="sortorder" ng-show="propertyName === 'superior.fName'" ng-class="{reverse: reverse}"></span></th>
+        <th><a ng-click="sortBy('subsize', true)">Has Reports</a><span class="sortorder" ng-show="propertyName === 'subsize'" ng-class="{reverse: reverse}"></span></th>
+        <th>Edit</th>
+        <th>Delete</th> 
+      </tr>
+      
+    
+      <tr ng-repeat="emp in filteredItems | orderBy:propertyName:reverse | limitTo:empLimit " ng-click="showEmp(emp)">
+        <td>
+            
+                <img ng-src="{{emp.photo}}" class="img-thumbnail">
+            
+        </td>
+        <td>{{ emp.fName }}</td>
+        <td>{{ emp.lName }}</td>
+        <td class="text-capitalize">{{ emp.title }}</td>
+        <td class="text-capitalize">{{ emp.gender }}</td>
+        <td><a href="mailto:{{emp.email}}?Subject=Hello%20{{emp.fName}}" target="_top">{{ emp.email }}</a></td>
+        <td><a href="tel:{{emp.cellphone}}">{{ emp.cellphone }}</a></td>
+        <td><a href="tel:{{emp.officephone}}">{{ emp.officephone }}</a></td>
+        <td>{{ emp.startdate }}</td>
+        <td><a ng-click="getSup(emp.superior._id)">{{ emp.superior.fName + '&nbsp;' + emp.superior.lName }}</a></td>
+        <td><a ng-click="getSub(emp._id, emp.fName, emp.lName)">{{ emp.subsize }}</a></td>
+        <td>
+          <a class="w3-btn w3-ripple" href="#/employees/{{emp._id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
+        </td>
+        <td>
+          <button class="w3-btn w3-ripple" ng-click="deleteEmp(emp._id)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+        </td>
+      </tr>
+    
+    </table>
+    </div>
+    <br> 
+    <button class="w3-button w3-ripple w3-green" ng-click="sortBy()">Default sort</button>
+    &nbsp;&nbsp;&nbsp;
+    <button class="w3-button w3-ripple w3-indigo" ng-click="filteredItems=emps;search=''">Clear Filter</button>
+    <br>      
+    
+    <br>
+</div>
